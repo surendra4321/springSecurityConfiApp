@@ -21,11 +21,13 @@ public class AuthController {
 	@Autowired
 	private UserService userService;
 
+	@PreAuthorize("hasRole('ADMIN')")  //PreAuthorized will check the authorization before executing the method based on role
 	@GetMapping("/public")
 	public String publicEndpoint() {
 		return "This the public api";
 	}
 
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/users")
 	public List<User> getAllUsers() {
 		return this.userService.getAllUsers();
